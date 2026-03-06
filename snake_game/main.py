@@ -30,7 +30,6 @@ def game_over():
     config_screen()
     GameOver().game_over(score.score)
     
-
 while game_is_on:
     snake.move()
 
@@ -54,11 +53,6 @@ while game_is_on:
         if snake.body_parts[0].distance(body_part) < 10:
             game_over()
             game_is_on = False
-
-
-
-
-
 
 screen.exitonclick()
 

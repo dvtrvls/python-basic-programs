@@ -1,0 +1,10 @@
+note:
+
+this code program did not turn off the animation of the screen (tracer set to 0 and the use of update function)
+because my vscode is malfunctioning at the time. so if you try to run this program, you will notice that it will 
+have a problem graphically. though the only purpose of this code is to practice my logic and backend skills and the 
+issue is a more of a technical problem.
+
+i also did not test the program enough to check if there are some bugs. :)
+
+-dabe
