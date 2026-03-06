@@ -1,4 +1,4 @@
-note:
+#note:
 
 this code program did not turn off the animation of the screen (tracer set to 0 and the use of update function)
 because my vscode is malfunctioning at the time. so if you try to run this program, you will notice that it will 
