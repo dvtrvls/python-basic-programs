@@ -1,0 +1,8 @@
+#note:
+    this program is a buggy one since i have used a lot of workaround and did not copy exactly the way 
+    our instructor write it. i tried my own ways to implement the logic and i think i did not do it 
+    succesfully because it has many problems.
+
+    you may encounter strange behaviour of the ball such as jittering and unexpected bouncing direction.
+
+-dabe
