@@ -1,11 +1,12 @@
 from turtle import Turtle
 INITIAL_LENGTH = 3
-MOVE_DISTANCE = 20
+
 
 class Snake:
     def __init__(self):
         self.body_parts = []
         self.coordinates = []
+        self.initial_speed = 15
 
         for i in range(INITIAL_LENGTH):
             body = self.add_body()
@@ -18,7 +19,7 @@ class Snake:
             second_to_last = self.body_parts[body_part_num-1]
             x, y = second_to_last.position()
             self.body_parts[body_part_num].goto(x, y)
-        self.body_parts[0].forward(MOVE_DISTANCE)
+        self.body_parts[0].forward(self.initial_speed)
 
     def up(self):
         if self.body_parts[0].heading() != 270:
@@ -46,6 +47,8 @@ class Snake:
         new_body = self.add_body()
         new_body.goto(self.body_parts[-1].position())
         self.body_parts.append(new_body)
-
+    def update_speed(self):
+        self.initial_speed+=1
+        
 
     

@@ -38,6 +38,7 @@ while game_is_on:
         food.refresh()
         snake.extend()
         score.increase_score() 
+        snake.update_speed()
 
     #Check collision with walls
     x, y = snake.body_parts[0].position()
@@ -55,6 +56,7 @@ while game_is_on:
             game_is_on = False
 
 screen.exitonclick()
+
 
 
 
