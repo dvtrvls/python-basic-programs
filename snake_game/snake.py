@@ -1,13 +1,14 @@
 from turtle import Turtle
 INITIAL_LENGTH = 3
 
-
 class Snake:
     def __init__(self):
         self.body_parts = []
         self.coordinates = []
         self.initial_speed = 15
-
+        self.initialize_snake()
+       
+    def initialize_snake(self):
         for i in range(INITIAL_LENGTH):
             body = self.add_body()
             body.goto(body.xcor() -20 * i, body.ycor())
@@ -30,12 +31,12 @@ class Snake:
             self.body_parts[0].setheading(270)
 
     def left(self):
-        if self.body_parts[0].heading() != 360:
+        if self.body_parts[0].heading() != 0:
             self.body_parts[0].setheading(180)
 
     def right(self):
         if self.body_parts[0].heading() != 180:
-            self.body_parts[0].setheading(360)
+            self.body_parts[0].setheading(0)
 
     def add_body(self):
 
@@ -50,5 +51,13 @@ class Snake:
     def update_speed(self):
         self.initial_speed+=1
         
+    def snake_reset(self):
+        for body_part in self.body_parts:
+            body_part.hideturtle()
+            del body_part
+        self.body_parts.clear()
+        self.coordinates.clear()    
+        self.initialize_snake()
+        self.body_parts[0].goto(0, 0)
 
     

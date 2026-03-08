@@ -3,4 +3,3 @@ is not responding.
 in order to fix this, we should never put a while loop inside a constructor and only in our main program
 
 2. this program violate a lot of oop principles such as encapsulation, but it still works so i guess it is okay?
-

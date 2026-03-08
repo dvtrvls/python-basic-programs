@@ -21,7 +21,7 @@ player = Player()
 screen.onkey(key='Up', fun=player.move_forward)
 screen.onkey(key='Down', fun=player.move_backward)
 screen.onkey(key='Left', fun=player.move_left)
-screen.onkey(key='Right', fun=player.move_right)
+
 
 is_on = True
 car_manager = CarManager()
