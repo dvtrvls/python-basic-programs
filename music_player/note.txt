@@ -1,0 +1,20 @@
+note:
+this code only works for python versions that support pygame well.
+i tried to install pygame in python version 3.14.3 but it always
+failed for some reasons and the solution i found is to use python 3.12.0
+instead because pygame works well with this version
+
+```
+as you may notice, the code is messy. function here, function there, function everywhere.
+the reason for it is because initially i only wanted to make a cli-based music player but after
+writing the code, i realized that in order to make this more difficult, i will integrate
+all my knowledge about tkinter into the program. so it is noticeable that most of the functions
+here do not really touch the tkinter library, and also there is a main function and a gui main
+function.
+
+though the code is messy, i am satisfied with it. i finished it despite the uncomfortable
+feeling that i might encounter an error or a situation that i do not know how to deal with.
+i used some ai and research though, but what matters is that i did not watch any tutorial.
+
+-dabe
+```
