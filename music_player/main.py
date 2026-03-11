@@ -187,11 +187,15 @@ def gui_main():
         
     def next():
         play_music(next_music(get_music_files("music"), get_current_music()))
+        if not user_choice.get().isdigit():
+            user_choice.set("1")
         current_music_no = user_choice.get()
         user_choice.set(str(int(current_music_no) + 1 if int(current_music_no) < len(get_music_files("music")) else 1))
 
     def previous():
         play_music(previous_music(get_music_files("music"), get_current_music()))
+        if not user_choice.get().isdigit():
+            user_choice.set("1")
         current_music_no = user_choice.get()
         user_choice.set(str(int(current_music_no) - 1 if int(current_music_no) > 1 else len(get_music_files("music"))))
 
