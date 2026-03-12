@@ -1,10 +1,14 @@
 from tkinter import *
+import pygame as pg
+
 
 #ask the user to start the count down
 #start the count down
 #when count down reach zero, countdown 5 minutes for break
 #then continue
 
+
+pg.mixer.init()
 window = Tk()
 window.title("Pomodoro Program")
 window.config(bg="lightblue")
@@ -52,14 +56,13 @@ def update_time():
     task = window.after(1000, update_time)
 
 status_label = Label(window, text="WORK MODE", font=("Monospace", 20, "bold"), fg="darkblue", bg='lightblue')
-status_label.pack(pady=(30, 10))
+status_label.grid(row=0, column=0, padx=165, pady=(30, 10))
 
 control_label = Label(window, text="START", font=("Monospace", 10, "bold"), fg="red", bg='lightblue')
-control_label.pack(pady=(30, 10))
+control_label.grid(row=1, column=0, padx=155)
 
 countdown_label = Label(window, text=f"{hours:02d}:{minutes:02d}:{seconds:02d}",font=("Consolas", 50), bg='lightblue')
-countdown_label.pack(pady=(50, 20))
-
+countdown_label.grid(row=2, column=0, padx=70)
 is_paused = True
 
 def pause():
@@ -75,28 +78,64 @@ def control():
     global is_paused
     if not is_paused:
         pause()
+        pause_continue_button.config(fg="darkred", bg="lightpink")
         control_label.config(text="PAUSED")
         is_paused = True
     else:
         continue_()
+        pause_continue_button.config(bg="lightgreen", fg="darkgreen")
         control_label.config(text="RUNNING")
         is_paused = False
 
 
 pause_continue_button = Button(window, text="Pause/Continue",font=("Consolas", 15), command=control, state=DISABLED)
-pause_continue_button.pack()
+pause_continue_button.grid(row=3, column=0)
+pause_continue_button.config(fg="darkred", bg="lightpink")
 
 start_button = Button(window, text="Start",font=("Consolas", 15), command=lambda: start(), bg="lightgreen", fg='darkgreen')
-start_button.pack()
-
+start_button.grid(row=4, column=0)
 
 def start():
     global is_paused
-    pause_continue_button.config(state=NORMAL)
+    pause_continue_button.config(state=NORMAL, bg="lightgreen", fg="darkgreen")
     start_button.config(fg="darkred", bg="lightpink", state=DISABLED)
     control_label.config(text="RUNNING")
     is_paused = False
     continue_()
+
+
+
+music_paused = False
+music_started = False
+
+
+def play_music():
+    global music_paused, music_started
+
+    if not music_started:
+        pg.mixer.music.load('music/classicalmusic.mp3')
+        pg.mixer.music.play()
+        music_started = True
+    elif music_paused:
+        pg.mixer.music.unpause()
+        music_paused = False
+
+def pause_music():
+    global music_paused
+    pg.mixer.music.pause()
+    music_paused = True
+
+def control_music():
+    if button_val.get() == 1:
+        play_music()
+    else:
+        pause_music()
+
+
+button_val = IntVar()
+check_button = Checkbutton(window, text="Classical Music", variable=button_val, command=control_music, bg="lightblue", fg="darkblue")
+check_button.grid(row=5, column=0, pady=20)
+
 
 
 window.mainloop()
