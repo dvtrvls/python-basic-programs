@@ -1,0 +1,8 @@
+note:
+    this one is a hell of a messy code. the only thing that is in my mind when
+    i am writing this is to make the program and its logic work based on my current
+    knowledge about the syntax of the tk library and python itself,
+    not giving a shi whether it is a clean code or not. 
+
+    but what matters is that i produced it. optimization and cleaning comes later,
+    you cannot improve what does not exist :
