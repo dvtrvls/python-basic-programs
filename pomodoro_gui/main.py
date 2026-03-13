@@ -9,6 +9,8 @@ import pygame as pg
 
 
 pg.mixer.init()
+pg.mixer.music.set_volume(0.5)
+
 window = Tk()
 window.title("Pomodoro Program")
 window.config(bg="lightblue")
@@ -22,8 +24,10 @@ x = (screen_width // 2) - (width // 2)
 y = (screen_height // 2) - (height // 2)
 
 window.geometry(f"{width}x{height}+{x}+{y}")
+work_time = 1800
+time_ = work_time
+break_time = 300
 
-time_ = 1800
 hours = time_ // 3600
 minutes = (time_ % 3600) // 60
 seconds = time_ % 60
@@ -42,16 +46,19 @@ def update_time():
     time_ -= 1
     
     if time_ < 0:
+        show_window()
         if is_work_mode:
             # Switch to break mode
             is_work_mode = False
-            time_ = 300  # short break for demo
-            status_label.config(text="BREAK TIME")
+            time_ = break_time # short break for demo
+            status_label.config(text="BREAK TIME !!")
         else:
             # Switch back to work mode
             is_work_mode = True
-            time_ = 1800
+            time_ = work_time
             status_label.config(text="WORK MODE")
+        task = window.after(3000, update_time)
+        return
 
     task = window.after(1000, update_time)
 
@@ -95,6 +102,21 @@ pause_continue_button.config(fg="darkred", bg="lightpink")
 start_button = Button(window, text="Start",font=("Consolas", 15), command=lambda: start(), bg="lightgreen", fg='darkgreen')
 start_button.grid(row=4, column=0)
 
+
+def show_window():
+    window.deiconify()
+    window.lift()
+    window.focus_force()
+
+def set_vol(val):
+    new_vol = float(val) / 100
+    pg.mixer.music.set_volume(new_vol)
+
+slider_volume = Scale(window, from_=0, to=100, bg="lightblue",orient=HORIZONTAL, fg="darkblue", troughcolor="royalblue", command=set_vol)
+slider_volume.grid(row=5, column=0, pady=(30,10))
+
+
+
 def start():
     global is_paused
     pause_continue_button.config(state=NORMAL, bg="lightgreen", fg="darkgreen")
@@ -102,8 +124,6 @@ def start():
     control_label.config(text="RUNNING")
     is_paused = False
     continue_()
-
-
 
 music_paused = False
 music_started = False
