@@ -161,6 +161,13 @@ def gui_main():
     next_music_button = Button(screen, text="Next", font=("Consolas", 12), bg="royalblue", fg="white", command=lambda: next())
     next_music_button.grid(row=8, column=0, padx=10, pady=5)
 
+    def set_vol(val):
+        new_vol = float(val) / 100
+        pg.mixer.music.set_volume(new_vol)
+
+    slider_volume = Scale(screen, from_=0, to=100, bg="lightblue",orient=HORIZONTAL, fg="darkblue", troughcolor="royalblue", command=set_vol)
+    slider_volume.grid(row=9, column=0, pady=(30,10))
+
     def on_submit():
         music_no = user_choice.get()
         if music_no.isdigit():
@@ -181,28 +188,27 @@ def gui_main():
             music_list = get_music_files("music")
             feedback_var.set("Choice submitted successfully!")
             if validate_user_input(music_no, music_list):
-                return music_list[music_no - 1]
-            
-    
-        
+                return music_list[music_no - 1] 
     def next():    
-        if not user_choice.get().isdigit() or user_choice.get().strip() is None:
-            user_choice.set("5")
-            play_music(next_music(get_music_files("music"), get_current_music()))
+        if not user_choice.get().isdigit() or user_choice.get().strip() == "":
+            user_choice.set(str(len(get_music_files("music"))))
+            play_music(get_music_files("music")[len(get_music_files("music"))-1])
             return
         current_music_no = user_choice.get()
         user_choice.set(str(int(current_music_no) + 1 if int(current_music_no) < len(get_music_files("music")) else 1))
         play_music(next_music(get_music_files("music"), get_current_music()))
     def previous():
+        if not user_choice.get().isdigit() or user_choice.get().strip() == "":
+            user_choice.set("1")
+            play_music(get_music_files("music")[0])
+            return
         if not user_choice.get().isdigit() or user_choice.get().strip() is None:
             user_choice.set("1")
             play_music(next_music(get_music_files("music"), get_current_music()))
-            return
-        
+            return     
         current_music_no = user_choice.get()
         user_choice.set(str(int(current_music_no) - 1 if int(current_music_no) > 1 else len(get_music_files("music"))))
-        play_music(previous_music(get_music_files("music"), get_current_music()))
-        
+        play_music(previous_music(get_music_files("music"), get_current_music()))       
     screen.mainloop()
 
 gui_main()

@@ -7,7 +7,6 @@ import pygame as pg
 #when count down reach zero, countdown 5 minutes for break
 #then continue
 
-
 pg.mixer.init()
 pg.mixer.music.set_volume(0.5)
 
@@ -102,7 +101,6 @@ pause_continue_button.config(fg="darkred", bg="lightpink")
 start_button = Button(window, text="Start",font=("Consolas", 15), command=lambda: start(), bg="lightgreen", fg='darkgreen')
 start_button.grid(row=4, column=0)
 
-
 def show_window():
     window.deiconify()
     window.lift()
@@ -115,8 +113,6 @@ def set_vol(val):
 slider_volume = Scale(window, from_=0, to=100, bg="lightblue",orient=HORIZONTAL, fg="darkblue", troughcolor="royalblue", command=set_vol)
 slider_volume.grid(row=5, column=0, pady=(30,10))
 
-
-
 def start():
     global is_paused
     pause_continue_button.config(state=NORMAL, bg="lightgreen", fg="darkgreen")
@@ -127,7 +123,6 @@ def start():
 
 music_paused = False
 music_started = False
-
 
 def play_music():
     global music_paused, music_started
@@ -151,12 +146,9 @@ def control_music():
     else:
         pause_music()
 
-
 button_val = IntVar()
 check_button = Checkbutton(window, text="Classical Music", variable=button_val, command=control_music, bg="lightblue", fg="darkblue")
 check_button.grid(row=5, column=0, pady=20)
-
-
 
 window.mainloop()
 
