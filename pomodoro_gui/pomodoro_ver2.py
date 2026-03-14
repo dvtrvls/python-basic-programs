@@ -58,7 +58,6 @@ def update():
 
     if time_left_in_seconds < 0:
         show_window()
-
         if is_work_mode:
             is_work_mode = False
             chck_img =  canvas.create_image(check_xcoordinates[session_finished], 350, image=check_photo)
