@@ -1,6 +1,6 @@
 from tkinter import *
 import random
-
+import pygame as pg
 
 yellow = "#FFDE42"
 blue1 = "#53CBF3"
@@ -48,10 +48,12 @@ def write_to_file():
    
 def submit():
     if not check_credentials():
-        response_label.config(text="fields cannot be empty")
+        response_label.config(text="any fields cannot be empty")
+        beep.play()
         return
     if not check_pass_length():
         response_label.config(text=f"password must be {password_length} characters long")
+        beep.play()
         return
     result = write_to_file()
     if result:
@@ -61,10 +63,13 @@ def submit():
 
 screen = Tk()
 screen.title("Password Manager")
-screen.geometry("650x500")
+screen.geometry("700x500")
 screen.resizable(False, False)
 screen.config(bg=blue1, padx=20, pady=20)
 lock_image = PhotoImage(file="lock.png")
+pg.mixer.init()
+beep = pg.mixer.Sound("errorsfx.mp3") # load sound
+beep.set_volume(0.2) 
 
 title_label = Label(screen, text="Password Manager", font=("Consolas", 30, "bold"), bg=blue1, fg=yellow)
 title_label.grid(row=0, column=1)
@@ -81,25 +86,25 @@ password_input = StringVar()
 gmail_label = Label(screen, text="EMail :", font=(FONT, 14, "bold"), bg=blue1, fg=blue2)
 gmail_label.grid(row=2, column=0)
 
-name_entry = Entry(screen, font=(FONT, 14, "bold"), fg=blue3, textvariable=gmail_input)
+name_entry = Entry(screen, font=(FONT, 14, "bold"), fg=blue3, textvariable=gmail_input, width=30)
 name_entry.grid(row=2, column=1)
 
 site_label = Label(screen, text="Site :", font=(FONT, 14, "bold"), bg=blue1, fg=blue2)
 site_label.grid(row=3, column=0)
 
-site_entry = Entry(screen, font=(FONT, 14, "bold"), fg=blue3, textvariable=site_input)
+site_entry = Entry(screen, font=(FONT, 14, "bold"), fg=blue3, textvariable=site_input,width=30)
 site_entry.grid(row=3, column=1)
 
 password_label = Label(screen, text="Password :", font=(FONT, 14, "bold"), bg=blue1, fg=blue2)
 password_label.grid(row=4, column=0)
 
-password_entry = Entry(screen, font=(FONT, 14, "bold"), fg=blue3, textvariable=password_input)
+password_entry = Entry(screen, font=(FONT, 14, "bold"), fg=blue3, textvariable=password_input,width=10)
 password_entry.grid(row=4, column=1)
 
-gen_pass_button = Button(screen, text="generate password", font=(FONT, 10, "bold"), bg=yellow, fg=blue2, command=generate_password)
+gen_pass_button = Button(screen, text="generate password", font=(FONT, 10, "bold"), bg=yellow, fg=blue2,width=20, command=generate_password)
 gen_pass_button.grid(row=4, column=2)
 
-submit_button = Button(screen, text="submit", font=(FONT, 10, "bold"), bg=yellow, fg=blue2, command=submit)
+submit_button = Button(screen, text="submit", font=(FONT, 10, "bold"), bg=yellow, fg=blue2, width=30, command=submit)
 submit_button.grid(row=5, column=1, pady=20)
 
 response_label = Label(screen, text="", font=("Consolas", 10, "bold"), bg=blue1, fg="darkred")
