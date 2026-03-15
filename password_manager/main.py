@@ -58,6 +58,9 @@ def submit():
     result = write_to_file()
     if result:
         response_label.config(text="saved successfully")
+        name_entry.delete(0, END)
+        site_entry.delete(0, END)
+        password_entry.delete(0, END)
     else:
         response_label.config(text=result)
 
