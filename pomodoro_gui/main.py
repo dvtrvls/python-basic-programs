@@ -112,7 +112,7 @@ def set_vol(val):
 
 slider_volume = Scale(window, from_=0, to=100, bg="lightblue",orient=HORIZONTAL, fg="darkblue", troughcolor="royalblue", command=set_vol)
 slider_volume.grid(row=5, column=0, pady=(30,10))
-
+slider_volume.set(30)
 def start():
     global is_paused
     pause_continue_button.config(state=NORMAL, bg="lightgreen", fg="darkgreen")
